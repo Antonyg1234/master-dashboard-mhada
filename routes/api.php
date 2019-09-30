@@ -22,9 +22,20 @@ Route::get('users',function(){
     return \App\User::where('id',1)->with(['role','boards'])->first();
 });
 
-Route::middleware(['cors'])->group(function () {
+
+Route::middleware(['cors','auth:api'])->group(function () {
   	Route::get('boards','BoardController@index');
 
 	Route::get('projects/{board_id}','ProjectController@index');
 });
+
+
+
+Route::group(['middleware'=>'client'],function(){
+
+});
+
+
+
+
 
