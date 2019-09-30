@@ -6,6 +6,7 @@ use App\Role;
 use App\UserRole;
 use App\Board;
 use App\UserBoard;
+use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UsersSeeder extends Seeder
             'name'=>'sudesh jadhav',
             'username'=>'admin',
             'email'=>'admin@gmail.com',
-            'password'=>bcrypt('Admin@123'),
+            'password'=>Hash::make('Admin@123'),
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ];
@@ -32,7 +33,7 @@ class UsersSeeder extends Seeder
             $add_admin_user->name='Admin';
             $add_admin_user->username='admin';
             $add_admin_user->email='admin@gmail.com';
-            $add_admin_user->password=bcrypt('admin@123');
+            $add_admin_user->password=Hash::make('admin@123');
             $add_admin_user->created_at=date('Y-m-d H:i:s');
             $add_admin_user->updated_at=date('Y-m-d H:i:s');
             $add_admin_user->save();
@@ -94,7 +95,7 @@ class UsersSeeder extends Seeder
             'name'=>'CO',
             'username'=>'co',
             'email'=>'co@gmail.com',
-            'password'=>bcrypt('co@123'),
+            'password'=>Hash::make('co@123'),
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ];
@@ -106,7 +107,7 @@ class UsersSeeder extends Seeder
             $add_co_user->name='CO';
             $add_co_user->username='co';
             $add_co_user->email='co@gmail.com';
-            $add_co_user->password=bcrypt('co@123');
+            $add_co_user->password=Hash::make('co@123');
             $add_co_user->created_at=date('Y-m-d H:i:s');
             $add_co_user->updated_at=date('Y-m-d H:i:s');
             $add_co_user->save();
@@ -153,7 +154,7 @@ class UsersSeeder extends Seeder
             'name'=>'sudesh jadhav',
             'username'=>'vp',
             'email'=>'vp@gmail.com',
-            'password'=>bcrypt('vp@123'),
+            'password'=>Hash::make('vp@123'),
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ];
@@ -165,7 +166,7 @@ class UsersSeeder extends Seeder
             $add_vp_user->name='VP';
             $add_vp_user->username='vp';
             $add_vp_user->email='vp@gmail.com';
-            $add_vp_user->password=bcrypt('vp@123');
+            $add_vp_user->password=Hash::make('vp@123');
             $add_vp_user->created_at=date('Y-m-d H:i:s');
             $add_vp_user->updated_at=date('Y-m-d H:i:s');
             $add_vp_user->save();

@@ -22,6 +22,15 @@ Route::get('users',function(){
     return \App\User::where('id',1)->with(['role','boards'])->first();
 });
 
-Route::get('boards','BoardController@index');
 
-Route::get('projects/{board_id}','ProjectController@index');
+Route::group(['middleware'=>'client'],function(){
+
+});
+
+Route::group(['middleware'=>'auth:api'],function(){
+    Route::get('boards','BoardController@index');
+    Route::get('projects/{board_id}','ProjectController@index');
+});
+
+
+
