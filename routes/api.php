@@ -23,7 +23,7 @@ Route::get('users',function(){
 });
 
 
-Route::middleware(['cors','auth:api'])->group(function () {
+Route::middleware('auth:api')->group(function () {
   	Route::get('boards','BoardController@index');
 
 	Route::get('projects/{board_id}','ProjectController@index');
