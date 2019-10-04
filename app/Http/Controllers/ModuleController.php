@@ -16,4 +16,13 @@ class ModuleController extends Controller
 
         return response()->json(json_decode($response));
     }
+
+    public function get_details($module_url)
+    {
+        $client = new \GuzzleHttp\Client();
+        $request = $client->get($module_url);
+        $response = $request->getBody();
+
+        return response()->json(json_decode($response));
+    }
 }
