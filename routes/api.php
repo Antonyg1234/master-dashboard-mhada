@@ -26,9 +26,12 @@ Route::get('users',function(){
 Route::middleware('auth:api')->group(function () {
   	Route::get('boards','BoardController@index');
 
-	Route::get('projects/{board_id}','ProjectController@index');
+    Route::get('projects/{board_id}','ProjectController@index');
+    
+    Route::get('modules/{project_id}','ModuleController@index');
+    
 });
-
+Route::get('modules/{project_id}','ModuleController@index');
 
 
 Route::group(['middleware'=>'client'],function(){
