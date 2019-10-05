@@ -20,7 +20,7 @@ class ModuleController extends Controller
     
     public function getDashboardDetails($module_type){
         $client = new \GuzzleHttp\Client();
-        $request = $client->get(env('MBD_LOCAL_URL').$module_type);
+        $request = $client->get(env('MBD_LOCAL_URL').'/'.$module_type);
         $response = $request->getBody();
         return response()->json(json_decode($response));
 
