@@ -64,7 +64,7 @@
                                     <div class="row">
                                         <div class="col-lg-9">
                                             <div class="btn-list">
-                                                <button type="submit" id="add_ward" class="btn btn-primary">Save</button>
+                                                <button type="submit" id="add_project" class="btn btn-primary">Save</button>
                                                 <a href="{{route('list-project')}}" class="btn btn-secondary">Cancel</a>
                                             </div>
                                         </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Board;
 use App\Http\Controllers\Controller;
-use App\Model\DeletedProject;
 use App\Model\DeleteProject;
 use App\Project;
 use Illuminate\Http\Request;
@@ -200,7 +199,7 @@ class ProjectController extends Controller
             'reason'    => $request->input('delete_message'),
         ]);
 
-        return redirect()->back()->with(['success'=> 'Project deleted succesfully']);
+        return redirect()->back()->with(['success'=> 'Project deleted successfully']);
     }
 
     public function loadDeleteProjectUsingAjax(Request $request){

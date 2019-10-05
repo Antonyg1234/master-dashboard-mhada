@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DeleteProject extends Model
+class DeleteBoard extends Model
 {
-    protected $table    = 'delete_project';
-    protected $fillable = [ 'project_id',
+    protected $table    = 'delete_board';
+    protected $fillable = [ 'board_id',
         'user_id',
         'name',
         'day',
