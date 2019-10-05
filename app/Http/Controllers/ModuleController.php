@@ -38,10 +38,9 @@ class ModuleController extends Controller
 
     public function get_dashboard_details(Request $request)
     {
-        $requestUrl     =   $request->url;
+        $requestUrl     =   urldecode($request->url['url']);
 
         $client = new \GuzzleHttp\Client();
-        $client->setDefaultOption(array('verify', false));
         $requestData = $client->get($requestUrl);
         $response = $requestData->getBody();
 
