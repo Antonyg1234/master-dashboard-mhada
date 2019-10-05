@@ -85,8 +85,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
-        return view('admin.role.create',compact('roles'));
+        return view('admin.role.create');
 
     }
     /**
@@ -169,7 +168,7 @@ class RoleController extends Controller
         $rolesDetails->delete();
 
         DeleteRole::create([
-            'role_id'=> $id,
+            'deleted_role_id'=> $id,
             'user_id'   => Auth::id(),
             'name'      => $rolesDetails->name,
             'day'       => date('l'),

@@ -15,7 +15,7 @@ class CreateDeleteProjectTable extends Migration
     {
         Schema::create('delete_project', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('deleted_project_id');
             $table->string('user_id')->nullable();
             $table->string('name')->nullable();
             $table->string('day')->nullable();

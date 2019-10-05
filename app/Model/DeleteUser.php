@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DeleteBoard extends Model
+class DeleteUser extends Model
 {
-    protected $table    = 'delete_board';
-    protected $fillable = [ 'deleted_board_id',
+    protected $table    = 'delete_user';
+    protected $fillable = [ 'deleted_user_id',
         'user_id',
         'name',
         'day',

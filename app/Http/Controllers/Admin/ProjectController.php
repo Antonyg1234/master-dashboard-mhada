@@ -190,7 +190,7 @@ class ProjectController extends Controller
         $projectsDetails->delete();
 
         DeleteProject::create([
-            'project_id'=> $id,
+            'deleted_project_id'=> $id,
             'user_id'   => Auth::id(),
             'name'      => $projectsDetails->name,
             'day'       => date('l'),

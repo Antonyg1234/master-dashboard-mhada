@@ -15,7 +15,7 @@ class CreateDeleteBoardTable extends Migration
     {
         Schema::create('delete_board', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('board_id');
+            $table->unsignedInteger('deleted_board_id');
             $table->string('user_id')->nullable();
             $table->string('name')->nullable();
             $table->string('day')->nullable();

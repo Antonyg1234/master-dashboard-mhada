@@ -55,7 +55,7 @@ class BoardController extends Controller
                     return $boards->description;
                 })
                 ->editColumn('icon_url', function ($boards) {
-                    return $boards->board_url;
+                    return $boards->icon_url;
                 })
                 ->editColumn('actions', function ($boards) {
                     return /*view('admin.boards.action', compact('boards'))->render()*/'action';
@@ -89,8 +89,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        $boards = Board::get();
-        return view('admin.board.create',compact('boards'));
+        return view('admin.board.create');
 
     }
     /**
@@ -176,7 +175,7 @@ class BoardController extends Controller
         $boardsDetails->delete();
 
         DeleteBoard::create([
-            'board_id'=> $id,
+            'deleted_board_id'=> $id,
             'user_id'   => Auth::id(),
             'name'      => $boardsDetails->name,
             'day'       => date('l'),

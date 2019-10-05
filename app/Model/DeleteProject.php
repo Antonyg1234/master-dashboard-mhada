@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DeleteProject extends Model
 {
     protected $table    = 'delete_project';
-    protected $fillable = [ 'project_id',
+    protected $fillable = [ 'deleted_project_id',
         'user_id',
         'name',
         'day',

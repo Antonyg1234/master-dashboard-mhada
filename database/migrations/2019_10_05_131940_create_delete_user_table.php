@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDeleteRoleTable extends Migration
+class CreateDeleteUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDeleteRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('delete_role', function (Blueprint $table) {
+        Schema::create('delete_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('deleted_role_id');
+            $table->unsignedInteger('deleted_user_id');
             $table->string('user_id')->nullable();
             $table->string('name')->nullable();
             $table->string('day')->nullable();
@@ -33,6 +33,6 @@ class CreateDeleteRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delete_role');
+        Schema::dropIfExists('delete_user');
     }
 }
