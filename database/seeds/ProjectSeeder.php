@@ -18,7 +18,9 @@ class ProjectSeeder extends Seeder
                 'name' => 'mbd',
                 'board_id' => Board::where(['name' => config('constant.boards.MHADA')])->value('id'),
                 'description' => 'MHADA',
-                'project_url' => 'http://mhada.php-dev.in/api/',
+                'project_url' => 'http://mhada.php-dev.in/api/mbd_dashboard',
+                'modules_count'=>'16',
+                'has_modules'=>1
             ],
         ];
 
@@ -34,10 +36,19 @@ class ProjectSeeder extends Seeder
                     $add_project->board_id=$project['board_id'];
                     $add_project->description=$project['description'];
                     $add_project->project_url=$project['project_url'];
+                    $add_project->modules_count=$project['modules_count'];
+                    $add_project->has_modules=$project['has_modules'];
                     $add_project->created_at=date('Y-m-d H:i:s');
                     $add_project->updated_at=date('Y-m-d H:i:s');
                     $add_project->save();
                 }
+            }else
+            {
+                $add_project->has_modules=$project['has_modules'];
+                $add_project->project_url=$project['project_url'];
+                $add_project->modules_count=$project['modules_count'];
+                $add_project->updated_at=date('Y-m-d H:i:s');
+                $add_project->save();
             }
         }
     }
