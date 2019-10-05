@@ -32,6 +32,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('module_details/{module_id}','ModuleController@get_details');
     
+    Route::get('{module_type}','ModuleController@getDashboardDetails');
+
 });
 
 
