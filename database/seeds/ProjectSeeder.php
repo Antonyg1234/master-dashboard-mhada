@@ -22,11 +22,19 @@ class ProjectSeeder extends Seeder
                 'modules_count'=>'16',
                 'has_modules'=>1
             ],
+            [
+                'name' => 'mtl',
+                'board_id' => Board::where(['name' => config('constant.boards.MBRRB')])->value('id'),
+                'description' => 'MBRRB',
+                'project_url' => 'https://mtl.mhada.gov.in/api/mtl_dashboard',
+                'modules_count'=>'1',
+                'has_modules'=>0
+            ],
         ];
 
         foreach($projects as $project)
         {
-            $add_project=Project::where(['name'=>'mbd'])->first();
+            $add_project=Project::where(['name'=>$project['name']])->first();
             if($add_project==null)
             {
                 if($project['board_id']!=null)
