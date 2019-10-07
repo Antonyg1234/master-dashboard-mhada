@@ -61,4 +61,13 @@ Route::group(['namespace'=> 'Admin','middleware' => ['auth']], function() {
     Route::get('/view-role/{id}', 'RoleController@show')->name('view-role');
     Route::delete('/delete-role/{id}', 'RoleController@destroy')->name('delete-role');
 
+    //User-Role
+    Route::get('/user-role/{id}', 'UserController@userRoles')->name('assign-role');
+    Route::post('/user-role/{id}', 'UserController@storeUserRoles')->name('store-user-role');
+
+    //User-Board
+    Route::get('/user-board/{id}', 'UserController@userBoards')->name('assign-board');
+    Route::post('/user-board/{id}', 'UserController@storeUserBoards')->name('store-user-board');
+
+
 });

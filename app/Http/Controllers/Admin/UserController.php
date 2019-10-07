@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Board;
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Model\DeleteUser;
+use App\UserBoard;
+use App\UserRole;
 use Illuminate\Http\Request;
 use Config;
 use Illuminate\Support\Facades\Auth;
@@ -194,6 +198,62 @@ class UserController extends Controller
         return view('admin.user.deleteReason', compact('id'))->render();
     }
 
+    /**
+     * Assign role to the specific user.
+     *
+     * @param  int  $user_id
+     * @return Response
+     */
+    public function userRoles($user_id){
+
+        $roles = Role::get();
+        $user_name = User::where('id',$user_id)->value('name');
+        $user_roles = UserRole::where('user_id',$user_id)->pluck('role_id')->toArray();
+        Return view('admin.user.roles',compact('roles','user_name','user_id','user_roles'));
+    }
+
+    /**
+     * Store roles of the specific user.
+     *
+     * @param  int  $user_id
+     * @return Response
+     */
+    public function storeUserRoles(Request $request, $user_id){
+
+        $user = User::find($user_id);
+        $roles = $request->roles;
+        $user->roles()->sync($roles);
+
+        return redirect()->back()->with(['success'=> 'Role has been assign to user successfully']);
+    }
 
 
+    /**
+     * Assign board to the specific user.
+     *
+     * @param  int  $user_id
+     * @return Response
+     */
+    public function userBoards($user_id){
+
+        $boards = Board::get();
+        $user_name = User::where('id',$user_id)->value('name');
+        $user_boards = UserBoard::where('user_id',$user_id)->pluck('board_id')->toArray();
+//        dd($user_boards);
+        Return view('admin.user.boards',compact('boards','user_name','user_id','user_boards'));
+    }
+    /**
+     * Store boards of the specific user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function storeUserBoards(Request $request, $user_id){
+
+        $user = User::find($user_id);
+        $boards = $request->boards;
+        $user->board()->sync($boards);
+
+        return redirect()->back()->with(['success'=> 'Board has been assign to user successfully']);
+    }
 }
