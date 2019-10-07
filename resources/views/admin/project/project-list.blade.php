@@ -3,7 +3,7 @@
 @section('content')
     {{--<div class="container">--}}
         {{--<div class="row justify-content-center">--}}
-            <div class="col-md-8">
+            <div class="col-md-8 list">
                 <h3>PROJECT LIST</h3>
                 <a href="{{route('add-project')}}" class="btn btn-primary align-left">
                     Add Project
