@@ -58,7 +58,7 @@ class UserController extends Controller
                     return $users->username;
                 })
                 ->editColumn('actions', function ($users) {
-                    return /*view('admin.users.action', compact('users'))->render()*/'action';
+                    return view('admin.user.action', compact('users'))->render();
                 })
 
                 ->rawColumns(['name','email','username','actions'])

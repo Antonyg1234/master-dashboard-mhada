@@ -58,7 +58,7 @@ class BoardController extends Controller
                     return $boards->icon_url;
                 })
                 ->editColumn('actions', function ($boards) {
-                    return /*view('admin.boards.action', compact('boards'))->render()*/'action';
+                    return view('admin.board.action', compact('boards'))->render();
                 })
 
                 ->rawColumns(['name','description','icon_url','actions'])

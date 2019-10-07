@@ -54,7 +54,7 @@ class RoleController extends Controller
                     return $roles->display_name;
                 })
                 ->editColumn('actions', function ($roles) {
-                    return /*view('admin.roles.action', compact('roles'))->render()*/'action';
+                    return view('admin.role.action', compact('roles'))->render();
                 })
 
                 ->rawColumns(['name','display_name','actions'])

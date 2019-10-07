@@ -38,13 +38,14 @@
 @endsection
 
 @push('scripts')
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 {!! $html->scripts() !!}
 <script>
     //function to detele
     $(document).ready(function () {
         $(document).on("click", ".delete-board", function () {
-//            var id = $(this).attr("data-id");
-            var id=1;
+            var id = $(this).attr("data-id");
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
