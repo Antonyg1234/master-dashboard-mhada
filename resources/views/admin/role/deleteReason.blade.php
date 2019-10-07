@@ -5,14 +5,16 @@
             <h4 class="modal-title">Delete Reason</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form id="DeleteRoleReason" role="form" method="post" class="form-horizontal" action="{{route('delete-role', $id)}}">
+        <form id="DeleteRoleReason" role="form" method="post" class="form-horizontal"
+              action="{{route('delete-role', $id)}}">
             {{ method_field('DELETE') }}
             @csrf
             <div class="modal-body">
                 <!-- <p>Some text in the modal.</p> -->
                 <div class="table--box-input mb-0">
                     <label for="delete_message">Reason:</label>
-                    <textarea name="delete_message" class="form-control form-control--custom" rows="5" id="delete_message"
+                    <textarea name="delete_message" class="form-control form-control--custom" rows="5"
+                              id="delete_message"
                               required></textarea>
                     <span class="help-block"></span>
                 </div>
