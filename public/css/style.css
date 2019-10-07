@@ -103,6 +103,8 @@ body {
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
+        /*margin-top: -20px;*/
+
     }
 
     #wrapper.toggled {
@@ -130,4 +132,11 @@ body {
 
 .align-left{
     float: right;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px!importatnt;
+    border: 1px solid transparent;
 }

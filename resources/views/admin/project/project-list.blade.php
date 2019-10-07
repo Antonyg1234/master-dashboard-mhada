@@ -24,13 +24,14 @@
 
 
             </div>
-            <input type="hidden" id="myModalBtn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />
 
-            <!-- Modal -->
-            <div id="myModal" class="modal fade" role="dialog">
-
-            </div>
             <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+        <input type="hidden" id="myModalBtn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+
         </div>
     </div>
 
@@ -38,13 +39,14 @@
 @endsection
 
 @push('scripts')
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 {!! $html->scripts() !!}
 <script>
     //function to detele
     $(document).ready(function () {
         $(document).on("click", ".delete-project", function () {
-//            var id = $(this).attr("data-id");
-            var id=4;
+            var id = $(this).attr("data-id");
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -56,8 +58,11 @@
                 url:"{{route('loadDeleteProjectUsingAjax')}}",
                 success:function(res)
                 {
+                    alert('here');
                     $("#myModal").html(res);
                     $("#myModalBtn").click();
+                    $('#myModal').modal('show');
+
                 }
             });
         });

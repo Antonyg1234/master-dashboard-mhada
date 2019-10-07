@@ -37,7 +37,6 @@ class ProjectController extends Controller
             ['data' => 'actions','name' => 'actions','title' => 'Actions','searchable' => false,'orderable'=>false],
         ];
 
-//dd($datatables->getRequest()->ajax());
         if ($datatables->getRequest()->ajax()) {
             DB::statement(DB::raw('set @rownum='. (isset($request->start) ? $request->start : 0) ));
 
@@ -63,7 +62,7 @@ class ProjectController extends Controller
                     return $projects->project_url;
                 })
                 ->editColumn('actions', function ($projects) {
-                    return /*view('admin.projects.action', compact('projects'))->render()*/'action';
+                    return view('admin.project.action', compact('projects'))->render();
                 })
 
                 ->rawColumns(['name','board_id','description','project_url','actions'])
