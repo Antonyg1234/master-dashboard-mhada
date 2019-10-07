@@ -35,4 +35,15 @@ class ModuleController extends Controller
 
         return response()->json(json_decode($response));
     }
+
+    public function get_dashboard_details(Request $request)
+    {
+        $requestUrl     =   urldecode($request->url['url']);
+
+        $client = new \GuzzleHttp\Client();
+        $requestData = $client->get($requestUrl);
+        $response = $requestData->getBody();
+
+        return response()->json(json_decode($response));
+    }
 }

@@ -16,17 +16,25 @@ class ProjectSeeder extends Seeder
         $projects = [
             [
                 'name' => 'mbd',
-                'board_id' => Board::where(['name' => config('constant.boards.MHADA')])->value('id'),
-                'description' => 'MHADA',
+                'board_id' => Board::where(['name' => config('constant.boards.MHADB')])->value('id'),
+                'description' => 'Mumbai Board Computerization',
                 'project_url' => 'http://mhada.php-dev.in/api/mbd_dashboard',
-                'modules_count'=>'16',
+                'modules_count'=>'14',
                 'has_modules'=>1
+            ],
+            [
+                'name' => 'mtl',
+                'board_id' => Board::where(['name' => config('constant.boards.MHADA')])->value('id'),
+                'description' => 'Material Testing Lab',
+                'project_url' => 'https://mtl.mhada.gov.in/api/mtl_dashboard',
+                'modules_count'=>'1',
+                'has_modules'=>0
             ],
         ];
 
         foreach($projects as $project)
         {
-            $add_project=Project::where(['name'=>'mbd'])->first();
+            $add_project=Project::where(['name'=>$project['name']])->first();
             if($add_project==null)
             {
                 if($project['board_id']!=null)
@@ -44,6 +52,8 @@ class ProjectSeeder extends Seeder
                 }
             }else
             {
+                $add_project->board_id=$project['board_id'];
+                $add_project->description=$project['description'];
                 $add_project->has_modules=$project['has_modules'];
                 $add_project->project_url=$project['project_url'];
                 $add_project->modules_count=$project['modules_count'];
