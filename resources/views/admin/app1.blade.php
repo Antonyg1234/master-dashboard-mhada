@@ -14,13 +14,15 @@
     <link href="{{asset('/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- Styles -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class=" navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -71,9 +73,12 @@
         </div>
     </nav>
 
-    @include('admin.sidebar')
-    <main class="py-4">
+
+    <main class="">
+        <div class="row justify-content-center">
+        @include('admin.sidebar')
         @yield('content')
+        </div>
     </main>
 </div>
 
