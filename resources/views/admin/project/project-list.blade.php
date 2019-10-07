@@ -38,6 +38,8 @@
 @endsection
 
 @push('scripts')
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 {!! $html->scripts() !!}
 <script>
     //function to detele
