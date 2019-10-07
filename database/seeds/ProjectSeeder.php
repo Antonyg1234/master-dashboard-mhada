@@ -17,15 +17,15 @@ class ProjectSeeder extends Seeder
             [
                 'name' => 'mbd',
                 'board_id' => Board::where(['name' => config('constant.boards.MHADB')])->value('id'),
-                'description' => 'MHADB',
+                'description' => 'Mumbai Board Computerization',
                 'project_url' => 'http://mhada.php-dev.in/api/mbd_dashboard',
-                'modules_count'=>'16',
+                'modules_count'=>'14',
                 'has_modules'=>1
             ],
             [
                 'name' => 'mtl',
-                'board_id' => Board::where(['name' => config('constant.boards.MBRRB')])->value('id'),
-                'description' => 'MTL',
+                'board_id' => Board::where(['name' => config('constant.boards.MHADA')])->value('id'),
+                'description' => 'Material Testing Lab',
                 'project_url' => 'https://mtl.mhada.gov.in/api/mtl_dashboard',
                 'modules_count'=>'1',
                 'has_modules'=>0
