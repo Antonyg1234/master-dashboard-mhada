@@ -1,4 +1,5 @@
-@extends('admin.app1')
+{{--@extends('admin.app1')--}}
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -17,7 +18,11 @@
                     You are logged in!
                 </div>
             </div>
+            <div style="margin-top: -137px">
+            @include('admin.sidebar')
+            </div>
         </div>
+
     </div>
 </div>
 @endsection
