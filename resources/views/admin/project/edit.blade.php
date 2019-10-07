@@ -1,9 +1,8 @@
 @extends('admin.app1')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+
+            <div class="col-md-8 list">
                 <div class="col-md-12">
                     <div class="m-subheader px-0 m-subheader--top">
                         <div class="d-flex align-items-center">
@@ -76,7 +75,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 @endsection
 

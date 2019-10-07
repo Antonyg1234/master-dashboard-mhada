@@ -1,14 +1,13 @@
 @extends('admin.app1')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+
+            <div class="col-md-8 list">
                 <div class="col-md-12">
 
                     <div class="m-subheader px-0 m-subheader--top">
                         <div class="d-flex align-items-center">
-                            <h3 class="m-subheader__title m-subheader__title--separator">Assign Board to User</h3>
+                            <h1 class="m-subheader__title m-subheader__title--separator">Assign Board to User</h1>
                             <div class="ml-auto btn-list">
                                 <a href="{{ route('list-user') }}" class="btn btn-link"><i class="fa fa-long-arrow-left" style="padding-right: 8px;"></i>Back</a>
                             </div>
@@ -45,7 +44,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+
 @endsection
 
