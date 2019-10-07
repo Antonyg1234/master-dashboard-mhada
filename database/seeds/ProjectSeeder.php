@@ -30,8 +30,24 @@ class ProjectSeeder extends Seeder
                 'modules_count'=>'1',
                 'has_modules'=>0
             ],
+            [
+                'name' => 'Masterlist',
+                'board_id' => Board::where(['name' => config('constant.boards.MBRRB')])->value('id'),
+                'description' => 'Masterlist Application',
+                'project_url' => 'http://masterlist.mhada.gov.in/admin/ApiDashboard/api_dashboard',
+                'modules_count'=>'1',
+                'has_modules'=>0
+            ],
+            [
+                'name' => 'E Billing',
+                'board_id' => Board::where(['name' => config('constant.boards.MBRRB')])->value('id'),
+                'description' => 'E Billing',
+                'project_url' => 'http://rrebilling.mhada.gov.in/api/rrbilling_dashboard',
+                'modules_count'=>'1',
+                'has_modules'=>0
+            ]
         ];
-
+        Project::truncate();
         foreach($projects as $project)
         {
             $add_project=Project::where(['name'=>$project['name']])->first();
