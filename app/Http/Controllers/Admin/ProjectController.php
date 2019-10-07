@@ -198,7 +198,7 @@ class ProjectController extends Controller
             'reason'    => $request->input('delete_message'),
         ]);
 
-        return redirect()->back()->with(['success'=> 'Project deleted successfully']);
+        return redirect()->route('list-project')->with(['success'=> 'Project deleted successfully']);
     }
 
     public function loadDeleteProjectUsingAjax(Request $request){

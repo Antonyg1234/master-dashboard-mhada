@@ -177,7 +177,7 @@ class RoleController extends Controller
             'reason'    => $request->input('delete_message'),
         ]);
 
-        return redirect()->back()->with(['success'=> 'Role deleted successfully']);
+        return redirect()->route('list-role')->with(['success'=> 'Role deleted successfully']);
     }
 
     public function loadDeleteRoleUsingAjax(Request $request){

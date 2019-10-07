@@ -184,7 +184,7 @@ class BoardController extends Controller
             'reason'    => $request->input('delete_message'),
         ]);
 
-        return redirect()->back()->with(['success'=> 'Board deleted successfully']);
+        return redirect()->route('list-board')->with(['success'=> 'Board deleted successfully']);
     }
 
     public function loadDeleteBoardUsingAjax(Request $request){

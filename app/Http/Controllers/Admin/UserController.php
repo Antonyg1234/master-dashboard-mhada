@@ -186,7 +186,7 @@ class UserController extends Controller
             'reason'    => $request->input('delete_message'),
         ]);
 
-        return redirect()->back()->with(['success'=> 'User deleted successfully']);
+        return redirect()->route('list-user')->with(['success'=> 'User deleted successfully']);
     }
 
     public function loadDeleteUserUsingAjax(Request $request){
