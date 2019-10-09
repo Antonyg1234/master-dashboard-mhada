@@ -12,6 +12,7 @@ use App\UserRole;
 use Illuminate\Http\Request;
 use Config;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -93,7 +94,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $boards = Board::get();
+        $roles = Role::get();
+        return view('admin.user.create',compact('boards','roles'));
 
     }
     /**
@@ -105,18 +108,34 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique',
-            'username' => 'required|unique',
+            'email' => 'required|unique:users|email',
+            'username' => 'required|unique:users',
+            'password' => 'required',
+            'board' => 'required',
+            'role' => 'required',
         ]);
         //create the new role
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->username = $request->input('username');
-        $user->save();
+        DB::beginTransaction();
 
-        return redirect()->route('list-user')
-            ->with('success','User created successfully');
+        try{
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->username = $request->input('username');
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+            $user->roles()->sync($request->role);
+            $user->board()->sync($request->board);
+            DB::commit();
+            return redirect()->route('list-user')
+                ->with('success','User created successfully');
+        } catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('list-user')
+                ->with('danger','Something Went Wrong');
+        }
+
+
     }
     /**
      * Display the specified resource.
@@ -126,9 +145,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-//        dd($id);
         $user = User::FindOrFail($id)->toArray();
-        return view('admin.user.show', compact( 'user'));
+        $userBoards = UserBoard::where('user_id',$id)->pluck('board_id')->toArray();
+        $userRoles = UserRole::where('user_id',$id)->pluck('role_id')->toArray();
+        $boards = Board::get();
+        $roles = Role::get();
+
+        return view('admin.user.show', compact( 'user','boards','roles','userBoards','userRoles'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -139,7 +162,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::FindOrFail($id)->toArray();
-        return view('admin.user.edit', compact( 'user'));
+        $userBoards = UserBoard::where('user_id',$id)->pluck('board_id')->toArray();
+        $userRoles = UserRole::where('user_id',$id)->pluck('role_id')->toArray();
+        $boards = Board::get();
+        $roles = Role::get();
+        return view('admin.user.edit', compact( 'user','boards','roles','userBoards','userRoles'));
     }
     /**
      * Update the specified resource in storage.
@@ -151,23 +178,41 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'email' => 'required|email',
+            'username' => 'required',
+            'board' => 'required',
+            'role' => 'required',
         ]);
 
-        $user = User::FindOrFail($id);
-        if($request->input('name') != $user['name'] ){
-            $user->name = $request->input('name');
-        }
-        if($request->input('email') != $user['email'] ){
-            $user->email = $request->input('email');
-        }
-        if($request->input('username') != $user['username'] ){
-            $user->username = $request->input('username');
-        }
+        DB::beginTransaction();
 
-        $user->save();
+        try{
+            $user = User::FindOrFail($id);
+            if($request->input('name') != $user['name'] ){
+                $user->name = $request->input('name');
+            }
+            if($request->input('email') != $user['email'] ){
+                $user->email = $request->input('email');
+            }
+            if($request->input('username') != $user['username'] ){
+                $user->username = $request->input('username');
+            }
+            if (isset($request->password) && (!(Hash::check($request->input('password'), $user->password)))) {
+                $user->password = Hash::make($request->input('password'));
+            }
 
-        return redirect()->route('list-user')
-            ->with('success','User updated successfully');
+            $user->save();
+            $user->roles()->sync($request->role);
+            $user->board()->sync($request->board);
+            DB::commit();
+
+            return redirect()->route('list-user')
+                ->with('success','User updated successfully');
+        } catch (\Exception $e){
+            DB::rollBack();
+            return redirect()->route('list-user')
+                ->with('danger','Something Went Wrong');
+        }
     }
     /**
      * Remove the specified resource from storage.
@@ -177,20 +222,34 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $usersDetails = User::findOrfail($id);
-        $usersDetails->delete();
+        DB::beginTransaction();
+        try{
+            $usersDetails = User::findOrfail($id);
+            $usersDetails->delete();
 
-        DeleteUser::create([
-            'deleted_user_id'=> $id,
-            'user_id'   => Auth::id(),
-            'name'      => $usersDetails->name,
-            'day'       => date('l'),
-            'date'      => date('Y-m-d'),
-            'time'      => date("h:i:s"),
-            'reason'    => $request->input('delete_message'),
-        ]);
+            UserBoard::where('user_id',$id)->delete();
 
-        return redirect()->route('list-user')->with(['success'=> 'User deleted successfully']);
+            UserRole::where('user_id',$id)->delete();
+
+            DeleteUser::create([
+                'deleted_user_id'=> $id,
+                'user_id'   => Auth::id(),
+                'name'      => $usersDetails->name,
+                'day'       => date('l'),
+                'date'      => date('Y-m-d'),
+                'time'      => date("h:i:s"),
+                'reason'    => $request->input('delete_message'),
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('list-user')->with(['success'=> 'User deleted successfully']);
+
+        } catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('list-user')
+                ->with('danger','Something Went Wrong');
+        }
     }
 
     public function loadDeleteUserUsingAjax(Request $request){

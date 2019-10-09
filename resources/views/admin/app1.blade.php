@@ -12,9 +12,11 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{asset('/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-multiselect.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -87,7 +89,9 @@
 </div>
 
 <script src="{{asset('js/jquery-1.9.1.min.js')}}" type="text/javascript"></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+{{--<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>--}}
+<script src="{{asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
 
 <script>
     window.Laravel = {!! json_encode([

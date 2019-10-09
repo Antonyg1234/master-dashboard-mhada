@@ -51,24 +51,72 @@
                                     <span class="text-danger">{{$errors->first('username')}}</span>
                                 </div>
                             </div>
+                            <div class="col-sm-4 offset-sm-1 form-group">
+                                <label class="col-form-label" for="password">Password:</label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <input type="password" id="password" name="password"
+                                           class="form-control form-control--custom m-input"
+                                           value="">
+                                    <span class="text-danger">{{$errors->first('password')}}</span>
+                                </div>
+                            </div>
                         </div>
+                        <div class="form-group m-form__group row">
+                            <div class="col-sm-4 form-group">
+                                <label class="col-form-label" for="board">Board:<span class="star">*</span></label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <select title="Select Board" data-live-search="true"
+                                            name="board[]" multiple
+                                            id="board">
+                                        @foreach($boards as $key => $board)
+                                            <option value={{$board->id}} {{(in_array($board->id,$userBoards)) ? 'selected' : ''}}>{{$board->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger">{{$errors->first('board')}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 offset-sm-1 form-group">
+                                <label class="col-form-label" for="role">Role:<span class="star">*</span></label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <select title="Select Role" data-live-search="true"
+                                            name="role[]" multiple
+                                            id="role">
+                                        @foreach($roles as $key => $role)
+                                            <option value={{$role->id}} {{(in_array($role->id,$userRoles)) ? 'selected' : ''}}>{{$role->display_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger">{{$errors->first('role')}}</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-                        <div class="m-form__actions px-0">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <div class="btn-list">
-                                        <button type="submit" id="edit_user" class="btn btn-primary">Update</button>
-                                        <a href="{{route('list-user')}}" class="btn btn-secondary">Cancel</a>
+                            <div class="m-form__actions px-0">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="btn-list">
+                                            <button type="submit" id="edit_user" class="btn btn-primary">Update</button>
+                                            <a href="{{route('list-user')}}" class="btn btn-secondary">Cancel</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
 
 @endsection
+@push('scripts')
+<script>
+    $('#role, #board').multiselect({
+        columns: 1,
+        placeholder: 'Please Select',
+        search: true,
+        selectAll: true
+    });
 
+</script>
+@endpush

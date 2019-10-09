@@ -16,6 +16,13 @@
                 </button> {{ Session::get('success') }}
             </div>
     @endif
+        @if(Session::has('danger'))
+            <div class="alert alert-danger fade in alert-dismissible show" style="margin-top:18px;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true" style="font-size:20px">×</span>
+                </button> {{ Session::get('danger') }}
+            </div>
+    @endif
     <!--begin: Datatable -->
 
     {!! $html->table() !!}
