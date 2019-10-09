@@ -51,7 +51,7 @@ class ProjectSeeder extends Seeder
                 'icon'=>'http://localhost:8050/images/13_online_bill_payment_master_card_electronic_invoice-512.png'
             ]
         ];
-        Project::truncate();
+       // Project::truncate();
         foreach($projects as $project)
         {
             $add_project=Project::where(['name'=>$project['name']])->first();

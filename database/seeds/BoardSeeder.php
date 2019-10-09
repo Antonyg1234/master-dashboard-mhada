@@ -75,7 +75,7 @@ class BoardSeeder extends Seeder
             ],
      
         ];
-        Board::truncate();
+        //Board::truncate();
         foreach ($boards as $board) {
             $board_add = Board::where(['name' => $board['name']])->first();
             if ($board_add == null) {
