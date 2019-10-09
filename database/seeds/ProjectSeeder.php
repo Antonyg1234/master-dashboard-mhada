@@ -20,7 +20,8 @@ class ProjectSeeder extends Seeder
                 'description' => 'Mumbai Board Computerization',
                 'project_url' => 'http://mhada.php-dev.in/api/mbd_dashboard',
                 'modules_count'=>'14',
-                'has_modules'=>1
+                'has_modules'=>1,
+                'icon'=>'http://localhost:8050/images/testing.png'
             ],
             [
                 'name' => 'mtl',
@@ -28,7 +29,8 @@ class ProjectSeeder extends Seeder
                 'description' => 'Material Testing Lab',
                 'project_url' => 'https://mtl.mhada.gov.in/api/mtl_dashboard',
                 'modules_count'=>'1',
-                'has_modules'=>0
+                'has_modules'=>0,
+                'icon'=>'http://localhost:8050/images/13_online_bill_payment_master_card_electronic_invoice-512.png'
             ],
             [
                 'name' => 'Masterlist',
@@ -36,7 +38,8 @@ class ProjectSeeder extends Seeder
                 'description' => 'Masterlist Application',
                 'project_url' => 'http://masterlist.mhada.gov.in/admin/ApiDashboard/api_dashboard',
                 'modules_count'=>'1',
-                'has_modules'=>0
+                'has_modules'=>0,
+                'icon'=>'http://localhost:8050/images/13_online_bill_payment_master_card_electronic_invoice-512.png'
             ],
             [
                 'name' => 'E Billing',
@@ -44,7 +47,8 @@ class ProjectSeeder extends Seeder
                 'description' => 'E Billing',
                 'project_url' => 'http://rrebilling.mhada.gov.in/api/rrbilling_dashboard',
                 'modules_count'=>'1',
-                'has_modules'=>0
+                'has_modules'=>0,
+                'icon'=>'http://localhost:8050/images/13_online_bill_payment_master_card_electronic_invoice-512.png'
             ]
         ];
         Project::truncate();
@@ -60,6 +64,7 @@ class ProjectSeeder extends Seeder
                     $add_project->board_id=$project['board_id'];
                     $add_project->description=$project['description'];
                     $add_project->project_url=$project['project_url'];
+                    $add_project->icon=$project['icon'];
                     $add_project->modules_count=$project['modules_count'];
                     $add_project->has_modules=$project['has_modules'];
                     $add_project->created_at=date('Y-m-d H:i:s');
@@ -72,6 +77,7 @@ class ProjectSeeder extends Seeder
                 $add_project->description=$project['description'];
                 $add_project->has_modules=$project['has_modules'];
                 $add_project->project_url=$project['project_url'];
+                $add_project->icon=$project['icon'];
                 $add_project->modules_count=$project['modules_count'];
                 $add_project->updated_at=date('Y-m-d H:i:s');
                 $add_project->save();
