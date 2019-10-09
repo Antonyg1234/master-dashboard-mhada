@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Board extends Model
 {
+
     use SoftDeletes;
 
     /**
@@ -15,4 +16,9 @@ class Board extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function users()
+    {
+        return $this->belongsToMany(\App\User::class,'user_boards','board_id','user_id');
+    }
 }
