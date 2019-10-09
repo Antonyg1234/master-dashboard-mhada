@@ -46,7 +46,6 @@
     $(document).ready(function () {
         $(document).on("click", ".delete-project", function () {
             var id = $(this).attr("data-id");
-            alert();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
