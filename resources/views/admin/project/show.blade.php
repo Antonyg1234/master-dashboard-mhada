@@ -56,14 +56,14 @@
                                     <span class="text-danger">{{$errors->first('board_id')}}</span>
                                 </div>
                             </div>
-
                             <div class="col-sm-4 offset-sm-1 form-group">
                                 <label class="col-form-label" for="project_url">Project Url:</label>
                                 <div class="m-input-icon m-input-icon--right">
-                                    <input disabled type="text" id="project_url" name="project_url"
-                                           class="form-control form-control--custom m-input"
-                                           value="{{ $project['project_url'] }}">
-                                    <span class="text-danger">{{$errors->first('project_url')}}</span>
+                                    @if(isset($project['project_url']))
+                                        <a href="{{$project['project_url']}}" target="_blank">{{$project['project_url']}}</a>
+                                    @else
+                                        <span>No Project Url Available.</span>
+                                    @endif
                                 </div>
                             </div>
 

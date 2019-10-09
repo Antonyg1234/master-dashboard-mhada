@@ -46,10 +46,21 @@
                             <div class="col-sm-4 form-group">
                                 <label class="col-form-label" for="icon_url">Icon Url:</label>
                                 <div class="m-input-icon m-input-icon--right">
-                                    <input disabled type="text" id="icon_url" name="icon_url"
-                                           class="form-control form-control--custom m-input"
-                                           value="{{ $board['icon_url'] }}">
-                                    <span class="text-danger">{{$errors->first('icon_url')}}</span>
+                                    @if(isset($board['icon_url'] ))
+                                        <a href="{{$board['icon_url'] }}" target="_blank">{{$board['icon_url'] }}</a>
+                                    @else
+                                        <span>No Project Url Available.</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-sm-4  offset-sm-1  form-group">
+                                <label class="col-form-label" for="icon_url">Icon Preview:</label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    @if(isset($board['icon_url'] ))
+                                        <img src="{{$board['icon_url']}}" class="css-class" alt="alt text">
+                                    @else
+                                        <span>No Project Url Available.</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
