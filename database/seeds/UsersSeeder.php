@@ -135,7 +135,7 @@ class UsersSeeder extends Seeder
             $co_user_role->save();
         }
 
-        $mumbai_board=Board::where(['name' => config('constant.boards.MHADA')])->first();
+        $mumbai_board=Board::where(['name' => config('constant.boards.MHADB')])->first();
         if($mumbai_board!=null)
         {
             $board_user=UserBoard::where(['user_id'=>$add_co_user->id,'board_id'=>$mumbai_board->id])->first();
