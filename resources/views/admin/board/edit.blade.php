@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group m-form__group row">
                             <div class="col-sm-4 form-group">
-                                <label class="col-form-label" for="icon_url">Board Url:</label>
+                                <label class="col-form-label" for="icon_url">Icon Url:</label>
                                 <div class="m-input-icon m-input-icon--right">
                                     <input type="text" id="icon_url" name="icon_url"
                                            class="form-control form-control--custom m-input"

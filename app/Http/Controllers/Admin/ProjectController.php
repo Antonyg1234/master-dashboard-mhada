@@ -34,6 +34,7 @@ class ProjectController extends Controller
             ['data' => 'board_id','name' => 'board_id','title' => 'Board Name'],
             ['data' => 'description','name' => 'description','title' => 'Description'],
             ['data' => 'project_url','name' => 'project_url','title' => 'Project Url'],
+            ['data' => 'icon','name' => 'icon','title' => 'Icon'],
             ['data' => 'actions','name' => 'actions','title' => 'Actions','searchable' => false,'orderable'=>false],
         ];
 
@@ -59,13 +60,19 @@ class ProjectController extends Controller
                     return $projects->description;
                 })
                 ->editColumn('project_url', function ($projects) {
-                    return $projects->project_url;
+                    $project_url = $projects->project_url;
+                    return '<a target="_blank" href="'.$project_url.'">'.$project_url.'</a>';
+                })
+                ->editColumn('icon', function ($projects) {
+                    $icon_url = $projects->icon;
+                    return '<img src="'.$icon_url.'"height="50px" width="50px"/>';
+
                 })
                 ->editColumn('actions', function ($projects) {
                     return view('admin.project.action', compact('projects'))->render();
                 })
 
-                ->rawColumns(['name','board_id','description','project_url','actions'])
+                ->rawColumns(['name','board_id','description','project_url','icon','actions'])
                 ->make(true);
 
         }

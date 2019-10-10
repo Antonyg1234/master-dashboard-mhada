@@ -32,6 +32,7 @@ class BoardController extends Controller
             ['data' => 'name','name' => 'name','title' => 'Board Name'],
             ['data' => 'description','name' => 'description','title' => 'Description'],
             ['data' => 'icon_url','name' => 'icon_url','title' => 'Icon Url'],
+            ['data' => 'icon_preview','name' => 'icon_preview','title' => 'Icon Preview'],
             ['data' => 'actions','name' => 'actions','title' => 'Actions','searchable' => false,'orderable'=>false],
         ];
 
@@ -55,13 +56,20 @@ class BoardController extends Controller
                     return $boards->description;
                 })
                 ->editColumn('icon_url', function ($boards) {
-                    return $boards->icon_url;
+                    $icon_url = $boards->icon_url;
+                    return '<a target="_blank" href="'.$icon_url.'">'.$icon_url.'</a>';
+
+                })
+                ->editColumn('icon_preview', function ($boards) {
+                    $icon_url = $boards->icon_url;
+                    return '<img src="'.$icon_url.'"/>';
+
                 })
                 ->editColumn('actions', function ($boards) {
                     return view('admin.board.action', compact('boards'))->render();
                 })
 
-                ->rawColumns(['name','description','icon_url','actions'])
+                ->rawColumns(['name','description','icon_url','icon_preview','actions'])
                 ->make(true);
 
         }
