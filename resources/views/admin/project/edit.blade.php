@@ -68,6 +68,28 @@
                             </div>
 
                         </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-sm-4 form-group">
+                                <label class="col-form-label" for="icon">Icon Upload:<span class="star">*</span></label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <input type="file" id="icon" name="icon"
+                                           class="form-control form-control--custom m-input"
+                                           value="{{ $project['icon'] }}">
+                                    <span class="text-danger">{{$errors->first('icon')}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 offset-sm-1 form-group">
+                                <label class="col-form-label" for="icon">Icon:<span class="star">*</span></label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <a href="{{$project['icon']}}">
+                                        <img src="{{$project['icon']}}"height="100px" width="100px"/>
+                                    </a>
+                                    <input type="hidden" name="old_icon" value="{{$project['icon']}}"/>
+                                    <span class="text-danger">{{$errors->first('icon')}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
                         <div class="m-form__actions px-0">
