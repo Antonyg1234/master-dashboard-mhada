@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Board;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\FileUpload;
 use App\Model\DeleteProject;
 use App\Project;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+
+    use FileUpload;
 
     protected $list_num_of_records_per_page;
 
@@ -115,6 +118,8 @@ class ProjectController extends Controller
             'name' => 'required|unique:boards,name',
             'board_id' => 'required',
             'project_url' => 'required',
+            'icon'  => 'required|image|mimes:jpg,png,gif,jpeg'
+
         ]);
         //create the new role
         $project = new Project();
@@ -122,6 +127,14 @@ class ProjectController extends Controller
         $project->board_id = $request->input('board_id');
         $project->description = $request->input('description');
         $project->project_url = $request->input('project_url');
+
+        if ($request->file('icon')) {
+            $image = $request->file('icon');
+            $file_name = $image->getClientOriginalName();
+            $folder_name = "images";
+            $uploadedFilePath =  $this->imageUpload($folder_name,$image,$file_name);
+        }
+        $project->icon = $uploadedFilePath;
         $project->save();
 
         return redirect()->route('list-project')
@@ -178,6 +191,14 @@ class ProjectController extends Controller
         if($request->input('project_url') != $project['project_url'] ){
             $project->project_url = $request->input('project_url');
         }
+        if ($request->file('icon')) {
+            $old_icon_link = $request->input('old_icon');
+            $image = $request->file('icon');
+            $file_name = $image->getClientOriginalName();
+            $folder_name = "images";
+            $uploadedFilePath =  $this->imageUpload($folder_name,$image,$file_name,$old_icon_link);
+        }
+        $project->icon = $uploadedFilePath;
 
         $project->save();
 
@@ -193,6 +214,8 @@ class ProjectController extends Controller
     public function destroy(Request $request, $id)
     {
         $projectsDetails = Project::findOrfail($id);
+        $folder = 'images';
+        $this->deleteOldImage($folder,$projectsDetails->icon);
         $projectsDetails->delete();
 
         DeleteProject::create([
