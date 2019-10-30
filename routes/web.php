@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('get_financial_detail','FinanceController@get_finance_details');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

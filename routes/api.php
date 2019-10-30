@@ -27,18 +27,20 @@ Route::middleware('auth:api')->group(function () {
   	Route::get('boards','BoardController@index');
 
     Route::get('projects/{board_id}','ProjectController@index');
-    
+
     Route::get('modules/{project_id}','ModuleController@index');
 
     Route::get('module_details/{module_id}','ModuleController@get_details');
-    
+
     Route::get('{module_type}','ModuleController@getDashboardDetails');
 
     Route::post('get_dashboard_detail','ModuleController@get_dashboard_details');
 
+    Route::post('get_financial_detail','FinanceController@get_finance_details');
+
 });
 
-
+ //Route::get('get_financial_detail','FinanceController@get_finance_details');
 Route::group(['middleware'=>'client'],function(){
 
 });
