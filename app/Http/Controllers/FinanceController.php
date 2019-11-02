@@ -11,8 +11,14 @@ class FinanceController extends Controller
         $post = [
             'board' => $request->board,
         ];
-
-        $ch = curl_init('http://203.129.224.86:8085/MHADAAccounting/rest/board/budget');
+        if($request->board=='All Boards')
+        {
+            $url="http://203.129.224.86:8085/MHADAAccounting/rest/board/budget/all";
+        }else
+        {
+            $url="http://203.129.224.86:8085/MHADAAccounting/rest/board/budget";
+        }
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
