@@ -39,11 +39,16 @@ class ModuleController extends Controller
     public function get_dashboard_details(Request $request)
     {
         $requestUrl     =   urldecode($request->url['url']);
+        $response   =   [];
+        /*echo $request->url['project_name'];*/
 
-        $client = new \GuzzleHttp\Client();
-        $requestData = $client->get($requestUrl);
-        $response = $requestData->getBody();
-
+        if(array_key_exists('project_name', $request->url) && ((stripos($request->url['project_name'],'Payroll' )) > -1)) {
+            $boardName =    $request->url['board_name'];
+        }  else {
+            $client = new \GuzzleHttp\Client();
+            $requestData = $client->get($requestUrl);
+            $response = $requestData->getBody();
+        }
         return response()->json(json_decode($response));
     }
 }
