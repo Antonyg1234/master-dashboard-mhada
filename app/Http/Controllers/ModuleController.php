@@ -42,13 +42,21 @@ class ModuleController extends Controller
         $response   =   [];
         /*echo $request->url['project_name'];*/
 
-        /*if(array_key_exists('project_name', $request->url) && ((stripos($request->url['project_name'],'Payroll' )) > -1)) {
+        if(array_key_exists('project_name', $request->url) && ((stripos($request->url['project_name'],'Payroll' )) > -1)) {
             $boardName =    $request->url['board_name'];
-        }  else {*/
-            $client = new \GuzzleHttp\Client();
-            $requestData = $client->get($requestUrl);
-            $response = $requestData->getBody();
-        /*}*/
+            switch($boardName) {
+                case 'MHADA' : str_replace('MHADA','Authority',$requestUrl);
+                                break;
+                case 'MBRRB' : str_replace('MBRRB','RECONSTRUCTION',$requestUrl);
+                    break;
+                default: break;
+            }
+        }
+
+        $client = new \GuzzleHttp\Client();
+        $requestData = $client->get($requestUrl);
+        $response = $requestData->getBody();
+
         $returnArray    =   json_decode($response,1);
         $returnArray['data']    =     array_filter($returnArray['data'], function ($value) {
             return ((!empty($value) || $value === 0 || $value==='0') && ($value != 'null'));
