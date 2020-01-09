@@ -45,9 +45,9 @@ class ModuleController extends Controller
         if(array_key_exists('project_name', $request->url) && ((stripos($request->url['project_name'],'Payroll' )) > -1)) {
             $boardName =    $request->url['board_name'];
             switch($boardName) {
-                case 'MHADA' : $requestUrl  =   str_replace('MHADA','Authority',$requestUrl);
+                case 'MHADA' : $requestUrl  =   str_ireplace('pradhikaran','Authority',$requestUrl);
                                 break;
-                case 'MBRRB' : $requestUrl  =   str_replace('MBRRB','RECONSTRUCTION',$requestUrl);
+                case 'MBRRB' : $requestUrl  =   str_ireplace('MBRRB','RECONSTRUCTION',$requestUrl);
                     break;
                 default: break;
             }
