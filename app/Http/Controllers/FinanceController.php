@@ -25,7 +25,9 @@ class FinanceController extends Controller
                 $ch = curl_init($totalBudgetUrl);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                ));
                 $totalBudgetResponseString = curl_exec($ch);
                 $totalBudgetResponse    =   json_decode($totalBudgetResponseString,1);
                 curl_close($ch);
@@ -35,9 +37,9 @@ class FinanceController extends Controller
             //$url    =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/budget";
             $url =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/totalBudget?boardName=".urlencode(str_ireplace(" board", '',$request->board  ));
             $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
             ));
