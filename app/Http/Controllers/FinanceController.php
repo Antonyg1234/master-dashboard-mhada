@@ -11,42 +11,40 @@ class FinanceController extends Controller
         $post = [
             'board' => $request->board,
         ];
-
         $totalBudgetUrl   =   '';
         $totalBudgetResponse    =   [];
-        $response   =   [];
 
         if($request->board=='All Boards')
         {
-            //$url="http://115.124.105.59:8085/MHADAAccounting/rest/board/budget/all";
-            $totalBudgetUrl =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/totalBudget?boardName=all";
-
-            if(!empty($totalBudgetUrl)){
-                $ch = curl_init($totalBudgetUrl);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                    'Content-Type: application/json',
-                ));
-                $totalBudgetResponseString = curl_exec($ch);
-                $totalBudgetResponse    =   json_decode($totalBudgetResponseString,1);
-                curl_close($ch);
-            }
+            $url="http://203.129.224.86:8085/MHADAAccounting/rest/board/budget/all";
+            $totalBudgetUrl =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/totalBudget?boardName=all";
         }else
         {
-            //$url    =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/budget";
-            $url =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/totalBudget?boardName=".urlencode(str_ireplace(" board", '',$request->board  ));
-            $ch = curl_init($url);
+            $url    =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/budget";
+            $totalBudgetUrl =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/totalBudget?boardName=".urlencode(str_ireplace(" board", '',$request->board  ));
+        }
+
+        if(!empty($totalBudgetUrl)){
+            $ch = curl_init($totalBudgetUrl);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-            ));
-            $response = curl_exec($ch);
+
+            $totalBudgetResponseString = curl_exec($ch);
+            $totalBudgetResponse    =   json_decode($totalBudgetResponseString,1);
             curl_close($ch);
-            $response   =   json_decode($response, 1);
         }
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response   =   json_decode($response, 1);
 
         if(!empty($totalBudgetResponse) && array_key_exists('data', $totalBudgetResponse) && !empty($totalBudgetResponse['data'])){
             $response['totalData']  =   $totalBudgetResponse['data'][0];
