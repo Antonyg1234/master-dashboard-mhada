@@ -16,12 +16,12 @@ class FinanceController extends Controller
 
         if($request->board=='All Boards')
         {
-            $url="http://203.129.224.86:8085/MHADAAccounting/rest/board/budget/all";
-            $totalBudgetUrl =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/totalBudget?boardName=all";
+            $url="http://115.124.105.59:8085/MHADAAccounting/rest/board/budget/all";
+            $totalBudgetUrl =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/totalBudget?boardName=all";
         }else
         {
-            $url    =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/budget";
-            $totalBudgetUrl =   "http://203.129.224.86:8085/MHADAAccounting/rest/board/totalBudget?boardName=".urlencode(str_ireplace(" board", '',$request->board  ));
+            $url    =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/budget";
+            $totalBudgetUrl =   "http://115.124.105.59:8085/MHADAAccounting/rest/board/totalBudget?boardName=".urlencode(str_ireplace(" board", '',$request->board  ));
         }
 
         if(!empty($totalBudgetUrl)){
